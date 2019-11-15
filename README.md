@@ -1,3 +1,5 @@
+You can find this repo on github: https://github.com/ucsb-cs56-f19/lab07-nathanwoo
+
 You can access the Jacadoc and Jacoco report through this URL: https://ucsb-cs56-f19.github.io/lab07-nathanwoo/
 
 You can find this app hosted on Heroku: https://cs56-f19-lab07-nathanwoo.herokuapp.com/ 
