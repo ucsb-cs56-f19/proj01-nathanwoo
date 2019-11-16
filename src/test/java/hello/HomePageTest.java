@@ -77,6 +77,6 @@ public class HomePageTest {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
                 .andExpect(xpath("/html/body/div/nav/div/ul[1]/li[2]/a").exists())
-                .andExpect(xpath("/html/body/div/nav/div/ul[1]/li[2]/a").string("Earthquakes"));
+                .andExpect(xpath("/html/body/div/nav/div/ul[1]/li[2]/a").string("Earthquake Search"));
     }
 }
