@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(WebController.class)
 public class HomePageTest {
@@ -32,7 +33,7 @@ public class HomePageTest {
     @MockBean
     private ClientRegistrationRepository crr;
 
-    
+
     @Test
     public void getHomePage_ContentType() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.TEXT_HTML))
@@ -77,6 +78,6 @@ public class HomePageTest {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
                 .andExpect(xpath("/html/body/div/nav/div/ul[1]/li[2]/a").exists())
-                .andExpect(xpath("/html/body/div/nav/div/ul[1]/li[2]/a").string("Earthquakes"));
+                .andExpect(xpath("/html/body/div/nav/div/ul[1]/li[2]/a").string("Earthquake Search"));
     }
 }
