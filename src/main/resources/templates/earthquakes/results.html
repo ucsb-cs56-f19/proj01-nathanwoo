@@ -30,17 +30,22 @@
     <h2> Results</h2>
 
     <table>
-        <thead>
-            <tr>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td th:text="${featureCollection.type}"></td>
-            </tr>
-        </tbody>
-    </table>
+      <thead>
+          <tr>
+              <th>Type</th>
+              <th>Url</th>
+              <th>Count</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td th:text="${featureCollection.type}"></td>
+              <td th:text="${featureCollection.metadata.url}"></td>
+              <td th:text="${featureCollection.metadata.count}"></td>
+
+          </tr>
+      </tbody>
+  </table>
 
 
     <div th:replace="bootstrap/bootstrap_footer.html"></div>
