@@ -7,12 +7,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 
 
 public class FeatureCollection {
     private static Logger logger = LoggerFactory.getLogger(FeatureCollection.class);
     public String type;
     public Metadata metadata;
+    public List<Feature> features;
 
      /**
      * Create a FeatureCollection object from json representation
