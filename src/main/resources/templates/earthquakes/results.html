@@ -59,7 +59,7 @@
       </thead>
       <tbody>
           <tr th:each="f: ${featureCollection.features}"> 
-              <td th:text="${f.id}"></td>
+              <td><a th:href="${f.properties.url}" th:text="${f.id}"></a></td>
               <td th:text="${f.properties.place}"></td>
               <td th:text="${f.properties.mag}"></td>
           </tr>
