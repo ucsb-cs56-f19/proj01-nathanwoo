@@ -4,6 +4,8 @@ You can access the Jacadoc and Jacoco report through this URL: https://ucsb-cs56
 
 You can find this app hosted on Heroku: https://cs56-f19-lab07-nathanwoo.herokuapp.com/ 
 
+Travis CI for this app could be found here: https://travis-ci.org/ucsb-cs56-f19/lab07-nathanwoo   
+
 A simple Spring Boot webapp using:
 * Thymeleaf templating
 * Pulling in Bootstrap from CDN.
