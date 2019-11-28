@@ -11,6 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import hello.controllers.EarthquakesController;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -24,7 +27,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(WebController.class)
+@WebMvcTest(EarthquakesController.class)
 public class EarthquakeSearchTest {
 
     @Autowired
