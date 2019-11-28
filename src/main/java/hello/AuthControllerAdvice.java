@@ -10,6 +10,8 @@ import hello.repositories.UserRepository;
 import hello.entities.AppUser;
 import java.util.List;
 
+import hello.services.MembershipService;
+
 @ControllerAdvice
 public class AuthControllerAdvice {
     @Autowired   
