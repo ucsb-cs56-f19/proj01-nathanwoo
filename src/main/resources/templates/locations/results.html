@@ -13,18 +13,37 @@
     <h1>Locations Search Results</h1>
     <table class="table">
         <thead>
-            <tr>
-                <th>Location</th>
-            </tr>            
+          <tr>
+            <th>Location</th>
+          </tr>            
         </thead>
         <tbody>
-                 <td th:text="${locSearch.location}"></td>           
+          <td th:text="${locSearch.location}"></td>           
         </tbody>
     </table>
 
-    <h2>Json Results</h2>
+    <h2>Location Search Results</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Place ID</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Display Name</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="p: ${placeCollection}"> 
+          <td th:text="${p.place_id}"></td>
+          <td th:text="${p.lat}"></td>
+          <td th:text="${p.lon}"></td>
+          <td th:text="${p.display_name}"></td>
+          <td th:text="${p.type}"></td>
+        </tr>        
+      </tbody>      
+    </table>
 
-    <pre th:text = "${json}">this is a place holder</pre>
 
     <div th:replace="bootstrap/bootstrap_footer.html"></div>
   </div>
