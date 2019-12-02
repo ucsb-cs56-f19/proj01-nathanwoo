@@ -7,7 +7,9 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
@@ -33,8 +35,8 @@ public class LocationsController {
     // private ClientRegistrationRepository clientRegistrationRepository;
 
     @Autowired
-    public LocationsController (LocationRepository locationRepository) {
-        this.locationRepository = locationRepository;   
+    public LocationsController(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
     }
 
     @GetMapping("/locations/search")
@@ -46,12 +48,12 @@ public class LocationsController {
     @GetMapping("/locations/results")
     public String getLocationsResults(Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken,
             LocSearch locSearch) {
-            LocationQueryService e = new LocationQueryService();
+        LocationQueryService e = new LocationQueryService();
         model.addAttribute("locSearch", locSearch);
         String json = e.getJSON(locSearch.getLocation());
-        model.addAttribute("json",json);
+        model.addAttribute("json", json);
         List<Place> placeCollection = Place.listFromJson(json);
-        model.addAttribute("placeCollection",placeCollection);
+        model.addAttribute("placeCollection", placeCollection);
         return "locations/results";
     }
 
@@ -64,21 +66,18 @@ public class LocationsController {
 
     @PostMapping("/locations/add")
     public String add(Location location, Model model) {
-      locationRepository.save(location);
-      model.addAttribute("locations", locationRepository.findAll());
-      return "locations/index";
+        locationRepository.save(location);
+        model.addAttribute("locations", locationRepository.findAll());
+        return "locations/index";
     }
 
-    // @GetMapping("/earthquakes/results")
-    // public String getEarthquakesResults(Model model, OAuth2AuthenticationToken
-    // oAuth2AuthenticationToken,
-    // EqSearch eqSearch) {
-    // EarthquakeQueryService e = new EarthquakeQueryService();
-    // model.addAttribute("eqSearch", eqSearch);
-    // String json = e.getJSON(eqSearch.getDistance(), eqSearch.getMinmag());
-    // model.addAttribute("json", json);
-    // FeatureCollection featureCollection = FeatureCollection.fromJSON(json);
-    // model.addAttribute("featureCollection",featureCollection);
-    // return "earthquakes/results";
-    // }
+    @DeleteMapping("/locations/delete/{id}")
+    public String delete(@PathVariable("id") long id, Model model) {
+        Location location = locationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid courseoffering Id:" + id));
+        locationRepository.delete(location);
+        model.addAttribute("locations", locationRepository.findAll());
+        return "locations/index";
+    }
+
 }
