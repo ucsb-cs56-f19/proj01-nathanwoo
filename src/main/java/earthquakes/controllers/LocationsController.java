@@ -15,6 +15,8 @@ import earthquakes.geojson.FeatureCollection;
 import earthquakes.services.LocationQueryService;
 import earthquakes.searches.LocSearch;
 import earthquakes.osm.Place;
+import earthquakes.entities.Location;
+import earthquakes.repositories.LocationRepository;
 
 import com.nimbusds.oauth2.sdk.client.ClientReadRequest;
 
@@ -23,8 +25,15 @@ import java.util.List;
 @Controller
 public class LocationsController {
 
+    private LocationRepository locationRepository;
+
+    // @Autowired
+    // private ClientRegistrationRepository clientRegistrationRepository;
+
     @Autowired
-    private ClientRegistrationRepository clientRegistrationRepository;
+    public LocationsController (LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;   
+    }
 
     @GetMapping("/locations/search")
     public String getLocationsSearch(Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken,
@@ -39,10 +48,16 @@ public class LocationsController {
         model.addAttribute("locSearch", locSearch);
         String json = e.getJSON(locSearch.getLocation());
         model.addAttribute("json",json);
-        // TODO: Actually do the search here and add results to the model
         List<Place> placeCollection = Place.listFromJson(json);
         model.addAttribute("placeCollection",placeCollection);
         return "locations/results";
+    }
+
+    @GetMapping("/locations")
+    public String index(Model model) {
+        Iterable<Location> locations = locationRepository.findAll();
+        model.addAttribute("locations", locations);
+        return "locations/index";
     }
 
     // @GetMapping("/earthquakes/results")
