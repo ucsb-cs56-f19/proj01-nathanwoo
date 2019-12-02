@@ -20,7 +20,7 @@ public class UsersController {
     
     @GetMapping(&quot;/users&quot;)
     public String index(Model model) {
-<span class="nc" id="L23">        Iterable&lt;AppUser&gt; users= userRepository.findAll();</span>
+<span class="nc" id="L23">        Iterable&lt;AppUser&gt; users = userRepository.findAll();</span>
 <span class="nc" id="L24">        model.addAttribute(&quot;users&quot;, users);</span>
 <span class="nc" id="L25">        return &quot;users/index&quot;;</span>
     }

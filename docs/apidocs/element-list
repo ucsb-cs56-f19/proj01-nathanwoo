@@ -3,6 +3,6 @@ earthquakes.controllers
 earthquakes.entities
 earthquakes.geojson
 earthquakes.osm
+earthquakes.repositories
 earthquakes.searches
 earthquakes.services
-earthquakes.UserRepository
