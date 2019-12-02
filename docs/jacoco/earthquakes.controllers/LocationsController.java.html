@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocationsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab07</a> &gt; <a href="index.source.html" class="el_package">earthquakes.controllers</a> &gt; <span class="el_source">LocationsController.java</span></div><h1>LocationsController.java</h1><pre class="source lang-java linenums">package earthquakes.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.Map;
+import java.util.HashMap;
+
+import earthquakes.geojson.FeatureCollection;
+import earthquakes.services.LocationQueryService;
+import earthquakes.searches.LocSearch;
+import earthquakes.osm.Place;
+
+import com.nimbusds.oauth2.sdk.client.ClientReadRequest;
+
+import java.util.List;
+
+@Controller
+<span class="nc" id="L24">public class LocationsController {</span>
+
+    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;
+
+    @GetMapping(&quot;/locations/search&quot;)
+    public String getLocationsSearch(Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken,
+            LocSearch locSearch) {
+<span class="nc" id="L32">        return &quot;locations/search&quot;;</span>
+    }
+
+    @GetMapping(&quot;/locations/results&quot;)
+    public String getLocationsResults(Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken,
+            LocSearch locSearch) {
+<span class="nc" id="L38">            LocationQueryService e = new LocationQueryService();</span>
+<span class="nc" id="L39">        model.addAttribute(&quot;locSearch&quot;, locSearch);</span>
+<span class="nc" id="L40">        String json = e.getJSON(locSearch.getLocation());</span>
+<span class="nc" id="L41">        model.addAttribute(&quot;json&quot;,json);</span>
+        // TODO: Actually do the search here and add results to the model
+<span class="nc" id="L43">        List&lt;Place&gt; placeCollection = Place.listFromJson(json);</span>
+<span class="nc" id="L44">        model.addAttribute(&quot;placeCollection&quot;,placeCollection);</span>
+<span class="nc" id="L45">        return &quot;locations/results&quot;;</span>
+    }
+
+    // @GetMapping(&quot;/earthquakes/results&quot;)
+    // public String getEarthquakesResults(Model model, OAuth2AuthenticationToken
+    // oAuth2AuthenticationToken,
+    // EqSearch eqSearch) {
+    // EarthquakeQueryService e = new EarthquakeQueryService();
+    // model.addAttribute(&quot;eqSearch&quot;, eqSearch);
+    // String json = e.getJSON(eqSearch.getDistance(), eqSearch.getMinmag());
+    // model.addAttribute(&quot;json&quot;, json);
+    // FeatureCollection featureCollection = FeatureCollection.fromJSON(json);
+    // model.addAttribute(&quot;featureCollection&quot;,featureCollection);
+    // return &quot;earthquakes/results&quot;;
+    // }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
