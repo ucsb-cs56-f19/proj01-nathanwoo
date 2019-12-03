@@ -64,6 +64,13 @@ public class LocationsController {
         return "locations/index";
     }
 
+    @GetMapping("/locations/admin")
+    public String admin(Model model) {
+        Iterable<Location> locations = locationRepository.findAll();
+        model.addAttribute("locations", locations);
+        return "locations/admin";
+    }
+
     @PostMapping("/locations/add")
     public String add(Location location, Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken) {
         String uid = oAuth2AuthenticationToken.getPrincipal().getAttributes().get("id").toString();
